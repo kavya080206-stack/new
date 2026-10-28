@@ -1,2 +1,7 @@
 hello
+<<<<<<< HEAD
 from main
+=======
+GitHub
+>>>>>>> feature
+all
