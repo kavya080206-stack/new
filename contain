@@ -1,0 +1,40 @@
+STEP 1: Create a folder named myapp on Desktop.
+
+STEP 2: Create index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My App</title>
+</head>
+<body>
+    <h1>Welcome to My App</h1>
+    <p>This is my first Docker application.</p>
+</body>
+</html>
+
+STEP 3: Create a file named Dockerfile (without extension)
+
+FROM tomcat:10.1-jdk17-temurin
+RUN mkdir -p /usr/local/tomcat/webapps/myapp
+COPY index.html /usr/local/tomcat/webapps/myapp/index.html
+EXPOSE 8080
+
+STEP 4: Open CMD inside the myapp folder and execute:
+
+docker build -t my-tomcat .
+docker images
+docker run -d --name my-tomcat-container -p 8080:8080 my-tomcat
+
+STEP 5: Open in browser:
+http://localhost:8080/myapp/
+
+STEP 6: Stop the container:
+
+docker stop my-tomcat-container
+
+STEP 7: Push image to Docker Hub:
+
+docker login
+docker tag my-tomcat YOUR_USERNAME/my-tomcat:latest
+docker push YOUR_USERNAME/my-tomcat:latest
