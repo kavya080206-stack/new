@@ -1,0 +1,81 @@
+STEP 0: CREATE REPOSITORY ON GITHUB
+Repository name: lab
+Select Public → Create repository
+
+STEP 1: CLONE
+git clone https://github.com/YOUR_USERNAME/lab.git
+cd lab
+
+STEP 2: CREATE FILE
+echo "Hello, GitHub" > file1.txt
+cat file1.txt
+
+STEP 3: COMMIT AND PUSH
+git add file1.txt
+git commit -m "Initial"
+git push -u origin main
+
+STEP 4: CREATE BRANCH
+git branch feature1
+git checkout feature1
+
+STEP 5: MODIFY FEATURE BRANCH
+notepad file1.txt
+
+Add: Feature branch update
+
+git add file1.txt
+git commit -m "Feature branch update"
+git push -u origin feature1
+
+STEP 6: COMPARE
+git diff main feature1
+
+STEP 7: CREATE MERGE CONFLICT
+git checkout main
+notepad file1.txt
+
+Replace contents with:
+Hello, GitHub
+Main branch change
+
+git add file1.txt
+git commit -m "Main branch change"
+git merge feature1
+
+STEP 8: RESOLVE CONFLICT
+notepad file1.txt
+
+Remove conflict markers and replace contents with:
+Hello, GitHub
+Main branch change
+Feature branch update
+
+git add file1.txt
+git commit -m "Merge conflict resolved"
+git push origin main
+
+STEP 9: PREPARE PULL REQUEST
+git checkout feature1
+notepad file1.txt
+
+Add: Pull request
+
+git add file1.txt
+git commit -m "Prepare pull request"
+git push origin feature1
+
+STEP 10: CREATE PULL REQUEST
+GitHub → lab → Pull requests → New pull request
+Base: main
+Compare: feature1
+Create pull request
+Resolve conflicts if prompted
+Commit resolution if prompted
+Merge pull request → Confirm
+
+FINAL VERIFICATION
+git checkout main
+git pull origin main
+git status
+cat file1.txt
