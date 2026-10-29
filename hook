@@ -1,0 +1,57 @@
+Experiment: GitHub Webhook Integration with Jenkins
+
+1. Create a GitHub repository named "git4".
+
+2. Create "file1.txt" and push it to GitHub.
+
+3. Open Jenkins and create a Freestyle Project named "git4".
+
+4. Under Source Code Management, select Git and enter the repository URL: "https://github.com/kavya080206-stack/git4.git"
+
+5. Set Branch Specifier to "*/main".
+
+6. Under Build Triggers, select GitHub hook trigger for GITScm polling.
+
+7. Under Build Steps, select Execute Windows batch command and enter:
+
+   echo github webhook triggered
+   git --version
+
+8. Click Save and select Build Now.
+
+9. Open the build number and click Console Output. Verify "Finished: SUCCESS".
+
+10. Download and extract ngrok from "https://ngrok.com/download".
+
+11. Open Command Prompt inside the folder containing "ngrok.exe".
+
+12. Sign up or log in at "https://dashboard.ngrok.com" and copy your authtoken from "https://dashboard.ngrok.com/get-started/your-authtoken".
+
+13. Run the following command, replacing YOUR_AUTHTOKEN with your actual token:
+
+    ngrok config add-authtoken YOUR_AUTHTOKEN
+
+14. Start ngrok:
+
+    ngrok http 8080
+
+15. Copy the HTTPS Forwarding URL displayed by ngrok. Keep ngrok running.
+
+16. In GitHub, go to Settings → Webhooks → Add webhook.
+
+17. Enter the Payload URL as "https://YOUR-NGROK-URL/github-webhook/" (replace with your active ngrok URL).
+
+18. Set Content type to "application/json".
+
+19. Select the "Just the push event" option and click Add webhook.
+
+20. Open Git Bash in the local "git4" folder and execute:
+
+    echo "Testing webhook" >> file1.txt
+    git add file1.txt
+    git commit -m "Test GitHub webhook"
+    git push origin main
+
+21. Check Jenkins Build History. A new build should start automatically.
+
+22. Open Console Output and verify "Finished: SUCCESS".
